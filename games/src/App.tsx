@@ -5,15 +5,22 @@ import Genres from "./components/Genres";
 
 function App() {
   return(
-    <Grid templateAreas={{
+    <Grid 
+    templateAreas={{
       base:`"nav" "main"`,
       lg: `"nav nav" "aside main"`
+    }}
+    templateColumns={{
+      base: '1fr',
+      lg: '200px 1fr'
     }}>
       <GridItem area="nav">
         <NavBar/>
       </GridItem>
       <Show above="lg">
-        <Genres/>
+        <GridItem area="aside" paddingX={5}>
+          <Genres/>
+        </GridItem>
       </Show>
       <GridItem area="main">
         <GameGrid/>
