@@ -1,6 +1,6 @@
 import {FaAndroid, FaApple, FaXbox, FaPlaystation, FaLinux, FaWindows} from 'react-icons/fa';
 import {MdPhoneIphone} from 'react-icons/md';
-import {SiNintendo} from 'react-icons/si';
+import {SiNintendo, SiAtari, SiSega} from 'react-icons/si';
 import {BsGlobe} from 'react-icons/bs';
 import { Platform } from '../hooks/useGame';
 import { HStack, Icon } from '@chakra-ui/react';
@@ -20,7 +20,10 @@ const PlatformIcons = ({platforms}: Props) => {
         mac: FaApple,
         linux: FaLinux,
         nintendo: SiNintendo,
-        web: BsGlobe
+        web: BsGlobe,
+        atari: SiAtari,
+        sega: SiSega
+
     }
 
   return (
