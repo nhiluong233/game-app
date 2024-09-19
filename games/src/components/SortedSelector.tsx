@@ -18,7 +18,7 @@ const SortedSelector = ({selectedHandler, selectedOrdering}: Props) => {
   return (
     <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown/>}>
-            {selectedOrdering? sortSelectors.find(selector => selector.value === selectedOrdering)?.label : 'Order by: Relevance'}
+        Order by: {selectedOrdering? sortSelectors.find(selector => selector.value === selectedOrdering)?.label : 'Relevance'}
         </MenuButton>
         <MenuList>
            {sortSelectors.map(s=><MenuItem key={s.value} onClick={()=>selectedHandler(s.value)}>{s.label}</MenuItem>)}
