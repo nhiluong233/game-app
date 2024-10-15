@@ -2,12 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import { FetchingData } from "../service/api-client";
 import apiClient from "../service/api-client";
-
-export interface Platform {
-  id: number;
-  slug: string;
-  name: string;
-}
+import { Platform } from "./usePlatform";
 
 export interface Game {
   id: number;
@@ -19,7 +14,7 @@ export interface Game {
 }
 
 const useGame = (gameQuery: GameQuery) =>
-  useQuery<FetchingData<Game>,Error>({
+  useQuery<FetchingData<Game>, Error>({
     queryKey: ["games", gameQuery], //anything change related to games and gameQuery will be reload page
     queryFn: () =>
       apiClient
