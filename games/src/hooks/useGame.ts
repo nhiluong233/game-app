@@ -1,28 +1,37 @@
+import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
-import useData from "./useData";
+import { FetchingData } from "../service/api-client";
+import apiClient from "../service/api-client";
 
-export interface Platform{
-    id: number;
-    slug: string;
-    name: string;
+export interface Platform {
+  id: number;
+  slug: string;
+  name: string;
 }
 
-export interface Game{
-    id: number;
-    name: string;
-    background_image: string;
-    parent_platforms: {platform: Platform}[];
-    metacritic: number;
-    rating_top: number;
+export interface Game {
+  id: number;
+  name: string;
+  background_image: string;
+  parent_platforms: { platform: Platform }[];
+  metacritic: number;
+  rating_top: number;
 }
 
+const useGame = (gameQuery: GameQuery) =>
+  useQuery<FetchingData<Game>,Error>({
+    queryKey: ["games", gameQuery], //anything change related to games and gameQuery will be reload page
+    queryFn: () =>
+      apiClient
+        .get<FetchingData<Game>>("/games", {
+          params: {
+            genres: gameQuery.genre?.id,
+            parent_platforms: gameQuery.platform?.id,
+            ordering: gameQuery.ordering,
+            search: gameQuery.searchText,
+          },
+        })
+        .then((res) => res.data),
+  });
 
-const useGame = (gameQuery: GameQuery) => useData<Game>('/games', {
-    params : {
-        genres: gameQuery.genre?.id, 
-        parent_platforms: gameQuery.platform?.id, 
-        ordering: gameQuery.ordering,
-        search: gameQuery.searchText
-    }}, [gameQuery])
-
-export default useGame
+export default useGame;
