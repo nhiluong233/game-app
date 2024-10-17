@@ -12,7 +12,7 @@ import cropImage from "../service/crop-image";
 import GenresSkeleton from "./GenresSkeleton";
 interface Props {
   onSelect: (genre: Genre | null) => void;
-  selectedGenre: Genre | null;
+  selectedGenre?: number;
 }
 const Genres = ({ onSelect, selectedGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
@@ -37,9 +37,7 @@ const Genres = ({ onSelect, selectedGenre }: Props) => {
               <Button
                 whiteSpace="normal"
                 textAlign="left"
-                fontWeight={
-                  genre.slug === selectedGenre?.slug ? "bold" : "normal"
-                }
+                fontWeight={genre.id === selectedGenre ? "bold" : "normal"}
                 variant="link"
                 fontSize={"lg"}
                 onClick={() => onSelect(genre)}

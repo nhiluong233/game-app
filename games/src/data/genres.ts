@@ -1,4 +1,4 @@
-export default[
+export const genres = [
     {
       "id": 4,
       "name": "Action",
